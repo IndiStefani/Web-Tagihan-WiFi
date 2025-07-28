@@ -14,7 +14,7 @@ class UserController extends Controller
     public function index(Request $request)
 
     {
-        $data = User::orderBy('id', 'DESC')->paginate(5);
+        $data = User::orderBy('id', 'ASC')->paginate(5);
         return view('users.index', compact('data'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
@@ -53,16 +53,21 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|same:confirm-password',
-            'roles' => 'required'
         ]);
 
         $input = $request->all();
         $input['password'] = Hash::make($input['password']);
 
-        $user = User::create($input);
-        $user->assignRole($request->input('roles'));
+        // Set 'roles' to the same value as 'name'
+        $roleName = $request->input('name');
 
-        return redirect()->route('users.index')
+        // Cek dan buat role jika belum ada
+        $role = Role::firstOrCreate(['name' => $roleName]);
+
+        $user = User::create($input);
+        $user->assignRole($roleName);
+
+        return redirect()->route('user.index')
             ->with('success', 'User created successfully');
     }
 
@@ -162,7 +167,7 @@ class UserController extends Controller
     public function destroy($id)
     {
         User::find($id)->delete();
-        return redirect()->route('users.index')
+        return redirect()->route('user.index')
             ->with('success', 'User deleted successfully');
     }
 }
