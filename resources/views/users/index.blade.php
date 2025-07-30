@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'user-management', 'title' => 'Light Bootstrap Dashboard Laravel by Creative Tim & UPDIVISION', 'navName' => 'User Management', 'activeButton' => 'laravel'])
+@extends('layouts.app', ['activePage' => 'user-management', 'title' => 'Light Bootstrap Dashboard Laravel by Creative Tim & UPDIVISION', 'navName' => 'User Management', 'activeButton' => 'master'])
 
 @section('content')
     <div class="content">
@@ -72,6 +72,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            {{ $data->links('pagination::bootstrap-4') }}
                         </div>
                     </div>
                 </div>

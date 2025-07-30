@@ -20,7 +20,7 @@ class RoleController extends Controller
 
     public function index(Request $request)
     {
-        $roles = Role::orderBy('id', 'DESC')->paginate(5);
+        $roles = Role::orderBy('id', 'ASC')->paginate(5);
         return view('roles.index', compact('roles'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
@@ -47,11 +47,14 @@ class RoleController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|unique:roles,name',
-            'permission' => 'required',
+            'permission' => 'required|array',
+            'permission.*' => 'exists:permissions,id',
         ]);
 
         $role = Role::create(['name' => $request->input('name')]);
-        $role->syncPermissions($request->input('permission'));
+        $permissionIds = $request->input('permission', []);
+        $permissionNames = Permission::whereIn('id', $permissionIds)->pluck('name')->toArray();
+        $role->syncPermissions($permissionNames);
 
         return redirect()->route('roles.index')
             ->with('success', 'Role created successfully');
@@ -127,7 +130,9 @@ class RoleController extends Controller
         $role->name = $request->input('name');
         $role->save();
 
-        $role->syncPermissions($request->input('permission'));
+        $permissionIds = $request->input('permission', []);
+        $permissionNames = Permission::whereIn('id', $permissionIds)->pluck('name')->toArray();
+        $role->syncPermissions($permissionNames);
 
         return redirect()->route('roles.index')
             ->with('success', 'Role updated successfully');

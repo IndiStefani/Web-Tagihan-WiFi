@@ -21,7 +21,7 @@
                                         <div class="col-md-14">
                                             <input id="email" type="email"
                                                 class="form-control @error('email') is-invalid @enderror" name="email"
-                                                value="{{ old('email', 'admin@lightbp.com') }}" required
+                                                value="{{ old('email', 'admin@gmail.com') }}" required
                                                 autocomplete="email" autofocus>
 
                                             @error('email')
@@ -37,7 +37,7 @@
                                             <div class="col-md-14">
                                                 <input id="password" type="password"
                                                     class="form-control @error('password') is-invalid @enderror"
-                                                    name="password" value="{{ old('password', 'secret') }}" required
+                                                    name="password" value="{{ old('password', '123456') }}" required
                                                     autocomplete="current-password">
 
                                                 @error('password')
