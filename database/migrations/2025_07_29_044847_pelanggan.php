@@ -19,6 +19,8 @@ return new class extends Migration
             $table->string('no_telepon');
             $table->date('tanggal_pemasangan')->nullable();
             $table->integer('biaya_bulanan')->nullable();
+            $table->foreignId('penarik_id')->nullable()->constrained('users')->onDelete('set null');
+            $table->enum('status', ['aktif', 'tidak aktif'])->default('aktif');
             $table->timestamps();
         });
     }

@@ -18,10 +18,12 @@ class Pelanggan extends Model
         'no_telepon',
         'tanggal_pemasangan',
         'biaya_bulanan',
+        'penarik_id',
+        'status',
     ];
 
     public function penarik()
     {
-        return $this->belongsTo(Penarik::class, 'penarik_id');
+        return $this->belongsTo(User::class, 'penarik_id');
     }
 }

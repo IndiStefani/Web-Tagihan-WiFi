@@ -32,7 +32,9 @@ class CreatePelangganSeeder extends Seeder
             'wilayah' => 'Wilayah ' . (($i % 3) + 1),
             'no_telepon' => '0812345678' . str_pad($i, 2, '0', STR_PAD_LEFT),
             'tanggal_pemasangan' => now()->subDays($i),
-            'biaya_bulanan' => 50000 + ($i * 1000),
+            'biaya_bulanan' => 100000,
+            'penarik_id' => rand(2, 5), // Assign penarik_id randomly, some may be null
+            'status' => 'aktif', // Default status for all records
             ]);
         }
     }

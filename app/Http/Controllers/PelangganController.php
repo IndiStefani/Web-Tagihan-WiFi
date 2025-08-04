@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\PelangganImport;
 use App\Models\Pelanggan;
+use App\Models\Penarik;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PelangganController extends Controller
 {
@@ -17,11 +20,12 @@ class PelangganController extends Controller
         $user = $request->user();
 
         if (!$user || !$user->hasRole('admin')) {
-            $pelanggans = Pelanggan::orderBy('id')->paginate(10);
+            $pelanggans = Pelanggan::with('penarik')->orderBy('id')->get();
         } else {
-            // $pelanggans = Pelanggan::where('role', $user->role)
-            //     ->orderBy('id', 'ASC')
-            //     ->paginate(10);
+            $pelanggans = Pelanggan::with('user')
+            ->where('penarik_id', $user->id)
+            ->orderBy('id')
+            ->get();
         }
 
         return view('pelanggan.index', compact('pelanggans'))
@@ -76,5 +80,16 @@ class PelangganController extends Controller
         $pelanggan->update($request->all());
 
         return redirect()->route('pelanggan.index')->with('success', 'Pelanggan updated successfully.');
+    }
+
+    public function importPelanggan(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx,xls,csv'
+        ]);
+
+        Excel::import(new PelangganImport, $request->file('file'));
+
+        return back()->with('success', 'Data pelanggan berhasil diimpor!');
     }
 }

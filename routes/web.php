@@ -60,5 +60,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::delete('/pelanggan/{id}', [PelangganController::class, 'destroy'])->name('pelanggan.destroy');
     Route::get('/pelanggan/{id}', [PelangganController::class, 'show'])->name('pelanggan.show');
     Route::get('/pelanggan/export', [PelangganController::class, 'export'])->name('pelanggan.export');
-    Route::post('/pelanggan/import', [PelangganController::class, 'import'])->name('pelanggan.import');
+    Route::post('/pelanggan/import', [PelangganController::class, 'importPelanggan'])->name('pelanggan.import');
 });

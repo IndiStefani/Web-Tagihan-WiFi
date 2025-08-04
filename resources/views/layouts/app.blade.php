@@ -20,6 +20,8 @@
     <link href="{{ asset('css/light-bootstrap-dashboard.css?v=2.0.0') }} " rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="{{ asset('css/demo.css') }}" rel="stylesheet" />
+    {{-- datatable --}}
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap4.min.css">
 
 </head>
 
@@ -40,7 +42,8 @@
 </body>
 
 <!--   Core JS Files   -->
-<script src="{{ asset('js/core/jquery.3.2.1.min.js') }}" type="text/javascript"></script>
+{{-- <script src="{{ asset('js/core/jquery.3.2.1.min.js') }}" type="text/javascript"></script> --}}
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <script src="{{ asset('js/core/popper.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('js/core/bootstrap.min.js') }}" type="text/javascript"></script>
 
@@ -59,6 +62,10 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <!-- Light Bootstrap Dashboard DEMO methods, don't include it in your project! -->
 <script src="{{ asset('js/demo.js') }}"></script>
+{{-- datatables --}}
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap4.min.js"></script>
+
 @stack('js')
 
 </html>
