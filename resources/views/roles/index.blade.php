@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'roles', 'title' => 'Light Bootstrap Dashboard Laravel by Creative Tim & UPDIVISION', 'navName' => 'Roles & Permission', 'activeButton' => 'master'])
+@extends('layouts.app', ['activePage' => 'roles', 'title' => 'Soses.NET Dashboard Tagihan by Stepheeen', 'navName' => 'Roles & Permission', 'activeButton' => 'master'])
 
 @section('content')
     @can('role-list')

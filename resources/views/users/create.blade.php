@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'user-management', 'title' => 'Light Bootstrap Dashboard Laravel by Creative Tim & UPDIVISION', 'navName' => 'User Management', 'activeButton' => 'laravel'])
+@extends('layouts.app', ['activePage' => 'user-management', 'title' => 'Soses.NET Dashboard Tagihan by Stepheeen', 'navName' => 'User Management', 'activeButton' => 'laravel'])
 
 @section('content')
     <div class="content">
@@ -19,7 +19,7 @@
                                     </ul>
                                 </div>
                             @endif
-                            <form method="POST" action="{{ route('user.store') }}">
+                            <form method="POST" action="{{ route('users.store') }}">
                                 @csrf
                                 <div class="form-group">
                                     <label for="name">Name</label>

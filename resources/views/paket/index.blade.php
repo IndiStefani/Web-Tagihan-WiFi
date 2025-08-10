@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'pelanggan', 'title' => 'Soses.NET Dashboard Tagihan by Stepheeen', 'navName' => 'Pelanggan', 'activeButton' => ''])
+@extends('layouts.app', ['activePage' => 'paket', 'title' => 'Soses.NET Dashboard Tagihan by Stepheeen', 'navName' => 'Paket', 'activeButton' => ''])
 
 @section('content')
     <div class="content">
@@ -9,12 +9,12 @@
                         <div class="card-header">
                             <div class="row align-items-center">
                                 <div class="col-6">
-                                    <h3 class="mb-0">Data Pelanggan</h3>
+                                    <h3 class="mb-0">Data Paket</h3>
                                     <p class="text-sm mb-0">
                                         List of all registered customers.
                                     </p>
                                 </div>
-                                <div class="col-6 text-right">
+                                {{-- <div class="col-6 text-right">
                                     <a href="{{ route('pelanggan.create') }}" class="btn btn-sm btn-success">
                                         <i class="fa fa-plus"></i> input pelanggan
                                     </a>
@@ -34,7 +34,7 @@
                                     <a href="{{ route('pelanggan.export') }}" class="btn btn-sm btn-primary">
                                         <i class="fa fa-download"></i> export pelanggan
                                     </a>
-                                </div>
+                                </div> --}}
 
                             </div>
                         </div>
@@ -45,47 +45,41 @@
                         </div>
 
                         <div class="card-body">
-                            <table id="tabel-pelanggan" class="table table-striped display">
+                            <table id="tabel-paket" class="table table-striped display">
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Nama</th>
-                                        <th>Alamat</th>
-                                        <th>No. Telepon</th>
                                         <th>Nama Paket</th>
-                                        <th>Penarik</th>
+                                        <th>Harga</th>
                                         <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @forelse($pelanggans as $key => $pelanggan)
+                                    @forelse($pakets as $key => $paket)
                                         <tr>
                                             <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $pelanggan->nama }}</td>
-                                            <td>{{ $pelanggan->alamat }}</td>
-                                            <td>{{ $pelanggan->no_telp }}</td>
-                                            <td>{{ ($pelanggan->paket->nama_paket) }}</td>
-                                            <td>{{ $pelanggan->penarik->name ?? '-' }}</td>
-                                            <td>
-                                                <a href="{{ route('pelanggan.show', $pelanggan->id) }}"
+                                            <td>{{ $paket->nama_paket }}</td>
+                                            <td>Rp.{{ number_format($paket->harga ?? '-', 0, ',', '.') }}</td>
+                                            {{-- <td>
+                                                <a href="{{ route('paket.show', $paket->id) }}"
                                                     class="btn btn-sm btn-info"><i class="fa fa-eye"></i></a>
 
-                                                <a href="{{ route('pelanggan.edit', $pelanggan->id) }}"
+                                                <a href="{{ route('paket.edit', $paket->id) }}"
                                                     class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
 
-                                                <form action="{{ route('pelanggan.destroy', $pelanggan->id) }}"
+                                                <form action="{{ route('paket.destroy', $paket->id) }}"
                                                     method="POST" style="display:inline;">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn btn-sm btn-danger"><i
                                                             class="fa fa-trash"></i></button>
                                                 </form>
-                                            </td>
+                                            </td> --}}
                                         </tr>
                                     @empty
                                         <tr>
                                             <td colspan="10" class="text-center align-middle">
-                                                <p class="text-muted fst-italic my-2">Tidak ada data pelanggan.</p>
+                                                <p class="text-muted fst-italic my-2">Tidak ada data paket.</p>
                                             </td>
                                         </tr>
                                     @endforelse
@@ -105,7 +99,7 @@
 @push('js')
     <script>
         $(document).ready(function() {
-            $('#tabel-pelanggan').DataTable();
+            $('#tabel-paket').DataTable();
         });
     </script>
 @endpush

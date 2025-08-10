@@ -19,33 +19,11 @@ class UserController extends Controller
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
-    /**
-
-     * Show the form for creating a new resource.
-
-     *
-
-     * @return \Illuminate\Http\Response
-
-     */
-
     public function create()
     {
         $roles = Role::pluck('name', 'name')->all();
         return view('users.create', compact('roles'));
     }
-
-    /**
-
-     * Store a newly created resource in storage.
-
-     *
-
-     * @param  \Illuminate\Http\Request  $request
-
-     * @return \Illuminate\Http\Response
-
-     */
 
     public function store(Request $request)
     {
@@ -62,44 +40,26 @@ class UserController extends Controller
         $roleName = $request->input('name');
 
         // Cek dan buat role jika belum ada
-        $role = Role::firstOrCreate(['name' => $roleName]);
+        $role = Role::firstOrCreate(['name' => $roleName, 'guard_name' => 'web']);
+
+        // Sinkronkan permission default ke role
+        $permissions = ['profile-view', 'profile-edit'];
+        $role->syncPermissions($permissions);
 
         $user = User::create($input);
         $user->assignRole($roleName);
 
-        return redirect()->route('user.index')
+
+        return redirect()->route('users.index')
             ->with('success', 'User created successfully');
     }
-
-    /**
-
-     * Display the specified resource.
-
-     *
-
-     * @param  int  $id
-
-     * @return \Illuminate\Http\Response
-
-     */
 
     public function show($id)
     {
         $user = User::find($id);
-        return view('users.show', compact('user'));
+        $roles = Role::pluck('name', 'name')->all();
+        return view('users.show', compact('user', 'roles'));
     }
-
-    /**
-
-     * Show the form for editing the specified resource.
-
-     *
-
-     * @param  int  $id
-
-     * @return \Illuminate\Http\Response
-
-     */
 
     public function edit($id)
     {
@@ -109,20 +69,6 @@ class UserController extends Controller
 
         return view('users.edit', compact('user', 'roles', 'userRole'));
     }
-
-    /**
-
-     * Update the specified resource in storage.
-
-     *
-
-     * @param  \Illuminate\Http\Request  $request
-
-     * @param  int  $id
-
-     * @return \Illuminate\Http\Response
-
-     */
 
     public function update(Request $request, $id)
     {
@@ -152,22 +98,10 @@ class UserController extends Controller
             ->with('success', 'User updated successfully');
     }
 
-    /**
-
-     * Remove the specified resource from storage.
-
-     *
-
-     * @param  int  $id
-
-     * @return \Illuminate\Http\Response
-
-     */
-
     public function destroy($id)
     {
         User::find($id)->delete();
-        return redirect()->route('user.index')
+        return redirect()->route('users.index')
             ->with('success', 'User deleted successfully');
     }
 }

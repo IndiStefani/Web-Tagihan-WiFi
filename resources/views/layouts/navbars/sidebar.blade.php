@@ -38,7 +38,7 @@ Tip 2: you can also add an image using data-image tag
                             </a>
                         </li>
                         <li class="nav-item @if ($activePage == 'user-management') active @endif">
-                            <a class="nav-link" href="{{ route('user.index') }}">
+                            <a class="nav-link" href="{{ route('users.index') }}">
                                 <i class="nc-icon nc-circle-09"></i>
                                 <p>{{ __('User Management') }}</p>
                             </a>
@@ -58,6 +58,17 @@ Tip 2: you can also add an image using data-image tag
                     <p>{{ __('Pelanggan') }}</p>
                 </a>
             </li>
+            <li class="nav-item @if ($activePage == 'tagihan') active @endif">
+                <a class="nav-link" href="{{ route('tagihan.index') }}">
+                    <i class="nc-icon nc-circle-09"></i>
+                    <p>{{ __('Tagihan') }}</p>
+                </a>
+            </li>
+            <li class="nav-item @if ($activePage == 'paket') active @endif">
+                <a class="nav-link" href="{{ route('paket.index') }}">
+                    <i class="nc-icon nc-circle-09"></i>
+                    <p>{{ __('Daftar Paket') }}</p>
+                </a>
             </li>
         </ul>
     </div>

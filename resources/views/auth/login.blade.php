@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'login', 'title' => 'Light Bootstrap Dashboard Laravel by Creative Tim & UPDIVISION'])
+@extends('layouts.app', ['activePage' => 'login', 'title' => 'Soses.NET Dashboard Tagihan by Stepheeen'])
 
 @section('content')
     <div class="full-page section-image" data-color="black"

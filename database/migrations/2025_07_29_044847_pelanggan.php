@@ -15,12 +15,13 @@ return new class extends Migration
             $table->id();
             $table->string('nama');
             $table->string('alamat');
-            $table->string('wilayah')->nullable();
-            $table->string('no_telepon');
-            $table->date('tanggal_pemasangan')->nullable();
-            $table->integer('biaya_bulanan')->nullable();
+            $table->string('no_telp');
+            $table->string('user')->nullable();
+            $table->date('tanggal_pasang')->nullable();
+            $table->foreignId('paket_id')->constrained('paket')->onDelete('cascade');
+            $table->integer('biaya_pasang')->nullable();
             $table->foreignId('penarik_id')->nullable()->constrained('users')->onDelete('set null');
-            $table->enum('status', ['aktif', 'tidak aktif'])->default('aktif');
+            $table->integer('kurang')->nullable();
             $table->timestamps();
         });
     }

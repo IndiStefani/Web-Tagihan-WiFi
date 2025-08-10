@@ -14,16 +14,28 @@ class Pelanggan extends Model
     protected $fillable = [
         'nama',
         'alamat',
-        'wilayah',
-        'no_telepon',
-        'tanggal_pemasangan',
-        'biaya_bulanan',
+        'no_telp',
+        'user',
+        'tanggal_pasang',
+        'paket_id',
+        'biaya_pasang',
         'penarik_id',
-        'status',
+        'tagihan_id',
+        'kurang'
     ];
 
     public function penarik()
     {
         return $this->belongsTo(User::class, 'penarik_id');
+    }
+
+    public function paket()
+    {
+        return $this->belongsTo(Paket::class, 'paket_id');
+    }
+
+    public function tagihan()
+    {
+        return $this->hasMany(Tagihan::class, 'tagihan_id');
     }
 }

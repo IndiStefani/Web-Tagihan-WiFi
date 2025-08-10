@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'user-management', 'title' => 'Light Bootstrap Dashboard Laravel by Creative Tim & UPDIVISION', 'navName' => 'User Management', 'activeButton' => 'master'])
+@extends('layouts.app', ['activePage' => 'user-management', 'title' => 'Soses.NET Dashboard Tagihan by Stepheeen', 'navName' => 'User Management', 'activeButton' => 'master'])
 
 @section('content')
     <div class="content">
@@ -16,7 +16,7 @@
                                     </p>
                                 </div>
                                 <div class="col-4 text-right">
-                                    <a href="{{ route('user.create') }}" class="btn btn-sm btn-success">Add user</a>
+                                    <a href="{{ route('users.create') }}" class="btn btn-sm btn-success">Add user</a>
                                 </div>
                             </div>
                         </div>

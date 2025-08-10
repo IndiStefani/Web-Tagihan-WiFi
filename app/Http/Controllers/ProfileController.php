@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pelanggan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
@@ -16,6 +18,13 @@ class ProfileController extends Controller
         return view('profile.show');
     }
 
+    public function edit()
+    {
+        $user = Auth::user(); // Ambil user yang sedang login
+        return view('profile.edit', compact('user'));
+    }
+
+
     /**
      * Update the profile for the given user.
      *
@@ -24,13 +33,34 @@ class ProfileController extends Controller
      */
     public function update(Request $request)
     {
-        // Validate and update the user's profile here
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
+        ]);
 
-        return redirect()->route('profile.show')->with('status', 'Profile updated successfully!');
+        $user = auth()->user();
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->save();
+
+        return redirect()->route('profile.edit')->with('status', 'Profile updated successfully!');
     }
 
-    public function edit()
+    public function updatePassword(Request $request)
     {
-        return view('profile.edit');
+        $request->validate([
+            'old_password' => 'required',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+
+        if (!\Hash::check($request->old_password, auth()->user()->password)) {
+            return back()->withErrors(['old_password' => 'Password lama salah']);
+        }
+
+        auth()->user()->update([
+            'password' => bcrypt($request->password),
+        ]);
+
+        return back()->with('password_status', 'Password berhasil diperbarui!');
     }
 }

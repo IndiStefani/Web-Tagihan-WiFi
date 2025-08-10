@@ -29,12 +29,13 @@ class CreatePelangganSeeder extends Seeder
             Pelanggan::create([
             'nama' => 'Pelanggan ' . $i,
             'alamat' => 'Alamat ' . $i,
-            'wilayah' => 'Wilayah ' . (($i % 3) + 1),
-            'no_telepon' => '0812345678' . str_pad($i, 2, '0', STR_PAD_LEFT),
-            'tanggal_pemasangan' => now()->subDays($i),
-            'biaya_bulanan' => 100000,
+            'no_telp' => '0812345678' . str_pad($i, 2, '0', STR_PAD_LEFT),
+            'user' => 'user' . $i,
+            'tanggal_pasang' => now()->subDays($i),
+            'paket_id' => rand(1, 3), // Assuming there are 5 paket records
+            'biaya_pasang' => rand(100000, 500000), // Random biaya_pasang between 100000 and 500000
             'penarik_id' => rand(2, 5), // Assign penarik_id randomly, some may be null
-            'status' => 'aktif', // Default status for all records
+            'kurang' => rand(0, 100000), // Random kurang between 0 and 100000
             ]);
         }
     }
