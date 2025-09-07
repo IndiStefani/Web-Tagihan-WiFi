@@ -21,9 +21,7 @@ Tip 2: you can also add an image using data-image tag
             <li class="nav-item">
                 <a class="nav-link" data-toggle="collapse" href="#laravelExamples"
                     @if ($activeButton == 'master') aria-expanded="true" @endif>
-                    <i>
-                        <img src="{{ asset('img/laravel.svg') }}" style="width:25px">
-                    </i>
+                    <i class="nc-icon nc-settings-gear-64"></i>
                     <p>
                         {{ __('Master') }}
                         <b class="caret"></b>
@@ -39,13 +37,13 @@ Tip 2: you can also add an image using data-image tag
                         </li>
                         <li class="nav-item @if ($activePage == 'user-management') active @endif">
                             <a class="nav-link" href="{{ route('users.index') }}">
-                                <i class="nc-icon nc-circle-09"></i>
+                                <i class="nc-icon nc-badge"></i>
                                 <p>{{ __('User Management') }}</p>
                             </a>
                         </li>
                         <li class="nav-item @if ($activePage == 'roles') active @endif">
                             <a class="nav-link" href="{{ route('roles.index') }}">
-                                <i class="nc-icon nc-circle-09"></i>
+                                <i class="nc-icon nc-key-25"></i>
                                 <p>{{ __('Role & Permission') }}</p>
                             </a>
                         </li>
@@ -54,19 +52,19 @@ Tip 2: you can also add an image using data-image tag
 
             <li class="nav-item @if ($activePage == 'pelanggan') active @endif">
                 <a class="nav-link" href="{{ route('pelanggan.index') }}">
-                    <i class="nc-icon nc-circle-09"></i>
+                    <i class="nc-icon nc-badge"></i>
                     <p>{{ __('Pelanggan') }}</p>
                 </a>
             </li>
             <li class="nav-item @if ($activePage == 'tagihan') active @endif">
                 <a class="nav-link" href="{{ route('tagihan.index') }}">
-                    <i class="nc-icon nc-circle-09"></i>
+                    <i class="nc-icon nc-money-coins"></i>
                     <p>{{ __('Tagihan') }}</p>
                 </a>
             </li>
             <li class="nav-item @if ($activePage == 'paket') active @endif">
                 <a class="nav-link" href="{{ route('paket.index') }}">
-                    <i class="nc-icon nc-circle-09"></i>
+                    <i class="nc-icon nc-bag"></i>
                     <p>{{ __('Daftar Paket') }}</p>
                 </a>
             </li>

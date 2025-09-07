@@ -6,6 +6,7 @@ use App\Imports\PelangganImport;
 use App\Models\Pelanggan;
 use App\Models\Penarik;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 
 class PelangganController extends Controller
@@ -19,17 +20,14 @@ class PelangganController extends Controller
     {
         $user = $request->user();
 
-        if (!$user || !$user->hasRole('admin')) {
-            $pelanggans = Pelanggan::with('penarik')->orderBy('id')->get();
+        if ($user && $user->hasRole('Admin')) {
+            // dd('Admin role detected');
+            $pelanggans = Pelanggan::with('penarik', 'paket')->orderBy('id')->get();
         } else {
-            $pelanggans = Pelanggan::with('user')
-            ->where('penarik_id', $user->id)
-            ->orderBy('id')
-            ->get();
+            $pelanggans = Pelanggan::with('penarik', 'paket')->where('penarik_id', auth()->id())->get();
         }
 
-        return view('pelanggan.index', compact('pelanggans'))
-            ->with('i', ($request->input('page', 1) - 1) * 10);
+        return view('pelanggan.index', compact('pelanggans'))->with('i', ($request->input('page', 1) - 1) * 10);
     }
 
     public function show($id)

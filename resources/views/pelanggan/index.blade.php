@@ -12,6 +12,8 @@
                                     <h3 class="mb-0">Data Pelanggan</h3>
                                     <p class="text-sm mb-0">
                                         List of all registered customers.
+
+                                        {{ auth()->user()->name }}
                                     </p>
                                 </div>
                                 <div class="col-6 text-right">
@@ -64,7 +66,7 @@
                                             <td>{{ $pelanggan->nama }}</td>
                                             <td>{{ $pelanggan->alamat }}</td>
                                             <td>{{ $pelanggan->no_telp }}</td>
-                                            <td>{{ ($pelanggan->paket->nama_paket) }}</td>
+                                            <td>{{ ($pelanggan->paket->nama_paket ?? '-') }}</td>
                                             <td>{{ $pelanggan->penarik->name ?? '-' }}</td>
                                             <td>
                                                 <a href="{{ route('pelanggan.show', $pelanggan->id) }}"

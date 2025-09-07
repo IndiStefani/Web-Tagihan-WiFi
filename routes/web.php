@@ -76,6 +76,7 @@ Route::group(['prefix' => 'tagihan', 'middleware' => ['auth']], function () {
     Route::post('/store', [TagihanController::class, 'store'])->name('tagihan.store');
     Route::get('/edit/{id}', [TagihanController::class, 'edit'])->name('tagihan.edit');
     Route::put('/update/{id}', [TagihanController::class, 'update'])->name('tagihan.update');
+    Route::put('/tagihan/{id}/update-status', [TagihanController::class, 'updateStatus'])->name('tagihan.updateStatus');
     Route::delete('/destroy/{id}', [TagihanController::class, 'destroy'])->name('tagihan.destroy');
     Route::get('/show/{id}', [TagihanController::class, 'show'])->name('tagihan.show');
 });

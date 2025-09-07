@@ -1,9 +1,4 @@
-@extends('layouts.app', [
-    'activePage' => 'tagihan',
-    'title' => 'Soses.NET Dashboard Tagihan by Stepheeen',
-    'navName' => 'Tagihan',
-    'activeButton' => '',
-])
+@extends('layouts.app', ['activePage' => 'tagihan', 'title' => 'Soses.NET Dashboard Tagihan by Stepheeen', 'navName' => 'Tagihan', 'activeButton' => '',])
 
 @section('content')
     <div class="content">
@@ -48,7 +43,74 @@
                                                 @if ($tagihan->status === 'lunas')
                                                     <span class="badge bg-success">Lunas</span>
                                                 @else
-                                                    <span class="badge bg-danger">Belum Lunas</span>
+                                                    <button class="badge btn-sm btn-secondary">Belum</button>
+                                                    <!-- Tombol Bayar -->
+                                                    <button type="button" class="btn btn-sm btn-warning"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#modalBayar{{ $tagihan->id }}">
+                                                        <i class="nc-icon nc-credit-card"></i>
+                                                    </button>
+
+                                                    <!-- Modal Bayar -->
+                                                    <div class="modal fade" id="modalBayar{{ $tagihan->id }}"
+                                                        tabindex="-1" aria-labelledby="modalBayarLabel{{ $tagihan->id }}"
+                                                        aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <form action="{{ route('tagihan.updateStatus', $tagihan->id) }}"
+                                                                method="POST">
+                                                                @csrf
+                                                                @method('PUT')
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title"
+                                                                            id="modalBayarLabel{{ $tagihan->id }}">
+                                                                            Pembayaran Tagihan</h5>
+                                                                        <button type="button" class="btn-close"
+                                                                            data-bs-dismiss="modal"
+                                                                            aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <p>Client:
+                                                                            <strong>{{ $tagihan->pelanggan->nama ?? '-' }}</strong>
+                                                                        </p>
+                                                                        <p>Service:
+                                                                            <strong>{{ $tagihan->keterangan ?? '-' }}</strong>
+                                                                        </p>
+
+                                                                        <div class="mb-3">
+                                                                            <label class="form-label">Jumlah Bayar</label>
+                                                                            <input type="number" name="payment"
+                                                                                value="{{ $tagihan->jumlah_tagihan }}"
+                                                                                class="form-control" required>
+                                                                        </div>
+
+                                                                        <div class="mb-3">
+                                                                            <label class="form-label">Metode Pembayaran</label>
+                                                                            <select name="payment_method"
+                                                                                class="form-select" required>
+                                                                                <option value="Tunai">Tunai</option>
+                                                                                <option value="Transfer">Transfer</option>
+                                                                            </select>
+                                                                        </div>
+
+                                                                        <div class="mb-3">
+                                                                            <label class="form-label">Tanggal
+                                                                                Pembayaran</label>
+                                                                            <input type="date" name="payment_date"
+                                                                                value="{{ now()->toDateString() }}"
+                                                                                class="form-control" required>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="submit"
+                                                                            class="btn btn-success">Simpan</button>
+                                                                        <button type="button" class="btn btn-secondary"
+                                                                            data-bs-dismiss="modal">Batal</button>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
                                                 @endif
                                             </td>
                                             <td>{{ $tagihan->keterangan ?? '-' }}</td>

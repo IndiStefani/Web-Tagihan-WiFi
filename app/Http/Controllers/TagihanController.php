@@ -63,4 +63,23 @@ class TagihanController extends Controller
     {
         // Logic to delete a specific tagihan
     }
+
+    public function updateStatus(Request $request, $id)
+    {
+        $request->validate([
+            'payment' => 'required|numeric|min:0',
+            'payment_method' => 'required|string',
+            'payment_date' => 'required|date',
+        ]);
+
+        $tagihan = Tagihan::findOrFail($id);
+        $tagihan->status = 'lunas';
+        $tagihan->tanggal_bayar = $request->payment_date;
+        $tagihan->save();
+
+        // Simpan riwayat pembayaran jika ada model Payment
+        // Payment::create([...]);
+
+        return redirect()->route('tagihan.index')->with('success', 'Tagihan berhasil dibayar.');
+    }
 }

@@ -34,7 +34,7 @@ class CreatePelangganSeeder extends Seeder
             'tanggal_pasang' => now()->subDays($i),
             'paket_id' => rand(1, 3), // Assuming there are 5 paket records
             'biaya_pasang' => rand(100000, 500000), // Random biaya_pasang between 100000 and 500000
-            'penarik_id' => rand(2, 5), // Assign penarik_id randomly, some may be null
+            'penarik_id' => rand(2, 4), // Assign penarik_id randomly, some may be null
             'kurang' => rand(0, 100000), // Random kurang between 0 and 100000
             ]);
         }

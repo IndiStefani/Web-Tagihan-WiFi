@@ -17,28 +17,78 @@ class CreateUserSeeder extends Seeder
      */
     public function run(): void
     {
-        // Buat Role jika belum ada
-        $role = Role::firstOrCreate(['name' => 'Penarik']);
+        // // Buat Role jika belum ada
+        // $role = Role::firstOrCreate(['name' => 'Penarik']);
 
-        // Ambil permission yang dibutuhkan
+        // // Ambil permission yang dibutuhkan
+        // $permissions = Permission::whereIn('name', [
+        //     'profile-view',
+        //     'profile-edit'
+        // ])->pluck('id')->all();
+
+        // // Sinkronkan permission ke role
+        // $role->syncPermissions($permissions);
+
+        // // Buat 4 user acak dan assign role Penarik
+        // for ($i = 1; $i <= 4; $i++) {
+        //     $user = User::create([
+        //         'name' => 'Penarik ' . $i,
+        //         'email' => 'penarik' . $i . '@example.com',
+        //         'password' => Hash::make('123456'), // atau bcrypt('123456')
+        //         'email_verified_at' => now(),
+        //         'remember_token' => Str::random(10),
+        //     ]);
+
+        //     $user->assignRole($role);
+        // }
+
         $permissions = Permission::whereIn('name', [
             'profile-view',
             'profile-edit'
         ])->pluck('id')->all();
 
-        // Sinkronkan permission ke role
-        $role->syncPermissions($permissions);
+        // Data role dan user
+        $data = [
+            [
+                'role' => 'Kalim',
+                'user' => [
+                    'name' => 'Kalim',
+                    'email' => 'kalim@example.com',
+                ],
+            ],
+            [
+                'role' => 'Luluk',
+                'user' => [
+                    'name' => 'Luluk',
+                    'email' => 'luluk@example.com',
+                ],
+            ],
+            [
+                'role' => 'Uliatin',
+                'user' => [
+                    'name' => 'Yanti',
+                    'email' => 'yanti@example.com',
+                ],
+            ],
+        ];
 
-        // Buat 4 user acak dan assign role Penarik
-        for ($i = 1; $i <= 4; $i++) {
-            $user = User::create([
-                'name' => 'Penarik ' . $i,
-                'email' => 'penarik' . $i . '@example.com',
-                'password' => Hash::make('123456'), // atau bcrypt('123456')
-                'email_verified_at' => now(),
-                'remember_token' => Str::random(10),
-            ]);
+        foreach ($data as $item) {
+            // Buat role
+            $role = Role::firstOrCreate(['name' => $item['role']]);
+            $role->syncPermissions($permissions);
 
+            // Buat user
+            $user = User::firstOrCreate(
+                ['email' => $item['user']['email']],
+                [
+                    'name' => $item['user']['name'],
+                    'password' => Hash::make('123456'),
+                    'email_verified_at' => now(),
+                    'remember_token' => Str::random(10),
+                ]
+            );
+
+            // Assign role
             $user->assignRole($role);
         }
     }
