@@ -15,14 +15,14 @@
                             <div class="card-body ">
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label for="email"
+                                        <label for="username"
                                             class="col-md-6 col-form-label">{{ __('E-Mail Address') }}</label>
 
                                         <div class="col-md-14">
-                                            <input id="email" type="email"
-                                                class="form-control @error('email') is-invalid @enderror" name="email"
-                                                value="{{ old('email', 'admin@gmail.com') }}" required
-                                                autocomplete="email" autofocus>
+                                            <input id="username" type="username"
+                                                class="form-control @error('username') is-invalid @enderror" name="username"
+                                                value="" required
+                                                autocomplete="username" autofocus>
 
                                             @error('email')
                                                 <span class="invalid-feedback" role="alert">
@@ -37,7 +37,7 @@
                                             <div class="col-md-14">
                                                 <input id="password" type="password"
                                                     class="form-control @error('password') is-invalid @enderror"
-                                                    name="password" value="{{ old('password', '123456') }}" required
+                                                    name="password" value="" required
                                                     autocomplete="current-password">
 
                                                 @error('password')

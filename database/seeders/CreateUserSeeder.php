@@ -53,6 +53,7 @@ class CreateUserSeeder extends Seeder
                 'role' => 'Kalim',
                 'user' => [
                     'name' => 'Kalim',
+                    'username' => 'kalim',
                     'email' => 'kalim@example.com',
                 ],
             ],
@@ -60,6 +61,7 @@ class CreateUserSeeder extends Seeder
                 'role' => 'Luluk',
                 'user' => [
                     'name' => 'Luluk',
+                    'username' => 'luluk',
                     'email' => 'luluk@example.com',
                 ],
             ],
@@ -67,6 +69,7 @@ class CreateUserSeeder extends Seeder
                 'role' => 'Uliatin',
                 'user' => [
                     'name' => 'Yanti',
+                    'username' => 'yanti',
                     'email' => 'yanti@example.com',
                 ],
             ],
@@ -82,7 +85,8 @@ class CreateUserSeeder extends Seeder
                 ['email' => $item['user']['email']],
                 [
                     'name' => $item['user']['name'],
-                    'password' => Hash::make('123456'),
+                    'username' => $item['user']['username'],
+                    'password' => Hash::make('12345678'),
                     'email_verified_at' => now(),
                     'remember_token' => Str::random(10),
                 ]

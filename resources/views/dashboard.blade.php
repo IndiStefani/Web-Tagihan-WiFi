@@ -4,27 +4,24 @@
     <div class="content">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-5">
                     <div class="card ">
                         <div class="card-header ">
-                            <h4 class="card-title">{{ __('Email Statistics') }}</h4>
-                            <p class="card-category">{{ __('Last Campaign Performance') }}</p>
+                            <h4 class="card-title">{{ __('Total Tagihan') }}</h4>
+                            <p class="card-category">{{ __('Tagihan bulan sekarang') }}</p>
                         </div>
                         <div class="card-body ">
-                            <div id="chartPreferences" class="ct-chart ct-perfect-fourth"></div>
-                            <div class="legend">
-                                <i class="fa fa-circle text-info"></i> {{ __('Open') }}
-                                <i class="fa fa-circle text-danger"></i> {{ __('Bounce') }}
-                                <i class="fa fa-circle text-warning"></i> {{ __('Unsubscribe') }}
-                            </div>
-                            <hr>
-                            <div class="stats">
-                                <i class="fa fa-clock-o"></i> {{ __('Campaign sent 2 days ago') }}
+                            <canvas id="tagihanPieChart" class="ct-chart ct-perfect-fourth" width="200"
+                                height="200"></canvas>
+                            <div class="legend mt-3">
+                                <i class="fa fa-circle text-success"></i> Bayar: {{ $paid }} &nbsp;&nbsp;
+                                <i class="fa fa-circle text-danger"></i> Belum Bayar: {{ $unpaid }}
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-8">
+
+                <div class="col-md-7">
                     <div class="card ">
                         <div class="card-header ">
                             <h4 class="card-title">{{ __('Users Behavior') }}</h4>
@@ -47,6 +44,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="row">
                 <div class="col-md-6">
                     <div class="card ">
@@ -88,12 +86,15 @@
                                                     </label>
                                                 </div>
                                             </td>
-                                            <td>{{ __('Sign contract for "What are conference organizers afraid of?"') }}</td>
+                                            <td>{{ __('Sign contract for "What are conference organizers afraid of?"') }}
+                                            </td>
                                             <td class="td-actions text-right">
-                                                <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-link">
+                                                <button type="button" rel="tooltip" title="Edit Task"
+                                                    class="btn btn-info btn-simple btn-link">
                                                     <i class="fa fa-edit"></i>
                                                 </button>
-                                                <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-link">
+                                                <button type="button" rel="tooltip" title="Remove"
+                                                    class="btn btn-danger btn-simple btn-link">
                                                     <i class="fa fa-times"></i>
                                                 </button>
                                             </td>
@@ -102,17 +103,21 @@
                                             <td>
                                                 <div class="form-check">
                                                     <label class="form-check-label">
-                                                        <input class="form-check-input" type="checkbox" value="" checked>
+                                                        <input class="form-check-input" type="checkbox" value=""
+                                                            checked>
                                                         <span class="form-check-sign"></span>
                                                     </label>
                                                 </div>
                                             </td>
-                                            <td>{{ __('Lines From Great Russian Literature? Or E-mails From My Boss?') }}</td>
+                                            <td>{{ __('Lines From Great Russian Literature? Or E-mails From My Boss?') }}
+                                            </td>
                                             <td class="td-actions text-right">
-                                                <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-link">
+                                                <button type="button" rel="tooltip" title="Edit Task"
+                                                    class="btn btn-info btn-simple btn-link">
                                                     <i class="fa fa-edit"></i>
                                                 </button>
-                                                <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-link">
+                                                <button type="button" rel="tooltip" title="Remove"
+                                                    class="btn btn-danger btn-simple btn-link">
                                                     <i class="fa fa-times"></i>
                                                 </button>
                                             </td>
@@ -121,7 +126,8 @@
                                             <td>
                                                 <div class="form-check">
                                                     <label class="form-check-label">
-                                                        <input class="form-check-input" type="checkbox" value="" checked>
+                                                        <input class="form-check-input" type="checkbox" value=""
+                                                            checked>
                                                         <span class="form-check-sign"></span>
                                                     </label>
                                                 </div>
@@ -129,10 +135,12 @@
                                             <td>{{ __('Flooded: One year later, assessing what was lost and what was found when a ravaging rain swept through metro Detroit') }}
                                             </td>
                                             <td class="td-actions text-right">
-                                                <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-link">
+                                                <button type="button" rel="tooltip" title="Edit Task"
+                                                    class="btn btn-info btn-simple btn-link">
                                                     <i class="fa fa-edit"></i>
                                                 </button>
-                                                <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-link">
+                                                <button type="button" rel="tooltip" title="Remove"
+                                                    class="btn btn-danger btn-simple btn-link">
                                                     <i class="fa fa-times"></i>
                                                 </button>
                                             </td>
@@ -148,10 +156,12 @@
                                             </td>
                                             <td>{{ __('Create 4 Invisible User Experiences you Never Knew About') }}</td>
                                             <td class="td-actions text-right">
-                                                <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-link">
+                                                <button type="button" rel="tooltip" title="Edit Task"
+                                                    class="btn btn-info btn-simple btn-link">
                                                     <i class="fa fa-edit"></i>
                                                 </button>
-                                                <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-link">
+                                                <button type="button" rel="tooltip" title="Remove"
+                                                    class="btn btn-danger btn-simple btn-link">
                                                     <i class="fa fa-times"></i>
                                                 </button>
                                             </td>
@@ -167,10 +177,12 @@
                                             </td>
                                             <td>{{ __('Read "Following makes Medium better"') }}</td>
                                             <td class="td-actions text-right">
-                                                <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-link">
+                                                <button type="button" rel="tooltip" title="Edit Task"
+                                                    class="btn btn-info btn-simple btn-link">
                                                     <i class="fa fa-edit"></i>
                                                 </button>
-                                                <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-link">
+                                                <button type="button" rel="tooltip" title="Remove"
+                                                    class="btn btn-danger btn-simple btn-link">
                                                     <i class="fa fa-times"></i>
                                                 </button>
                                             </td>
@@ -179,17 +191,20 @@
                                             <td>
                                                 <div class="form-check">
                                                     <label class="form-check-label">
-                                                        <input class="form-check-input" type="checkbox" value="" disabled>
+                                                        <input class="form-check-input" type="checkbox" value=""
+                                                            disabled>
                                                         <span class="form-check-sign"></span>
                                                     </label>
                                                 </div>
                                             </td>
                                             <td>{{ __('Unfollow 5 enemies from twitter') }}</td>
                                             <td class="td-actions text-right">
-                                                <button type="button" rel="tooltip" title="Edit Task" class="btn btn-info btn-simple btn-link">
+                                                <button type="button" rel="tooltip" title="Edit Task"
+                                                    class="btn btn-info btn-simple btn-link">
                                                     <i class="fa fa-edit"></i>
                                                 </button>
-                                                <button type="button" rel="tooltip" title="Remove" class="btn btn-danger btn-simple btn-link">
+                                                <button type="button" rel="tooltip" title="Remove"
+                                                    class="btn btn-danger btn-simple btn-link">
                                                     <i class="fa fa-times"></i>
                                                 </button>
                                             </td>
@@ -219,6 +234,62 @@
 
             demo.showNotification();
 
+        });
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const paid = {{ $paid }};
+        const unpaid = {{ $unpaid }};
+        const total = paid + unpaid;
+
+        const paidPercent = total > 0 ? ((paid / total) * 100).toFixed(1) : 0;
+
+        const centerText = {
+            id: 'centerText',
+            afterDraw(chart) {
+                const {
+                    ctx,
+                    width,
+                    height
+                } = chart;
+                ctx.save();
+                ctx.font = 'bold 20px Arial';
+                ctx.fillStyle = '#333';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(paidPercent + '% Lunas', width / 2, height / 2);
+            }
+        };
+
+        const ctx = document.getElementById('tagihanPieChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Lunas', 'Belum Lunas'],
+                datasets: [{
+                    data: [paid, unpaid],
+                    backgroundColor: ['#28a745', '#dc3545'], // hijau & merah
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                let value = context.raw;
+                                let percentage = total > 0 ? ((value / total) * 100).toFixed(1) + "%" : "0%";
+                                return context.label + ': ' + percentage;
+                            }
+                        }
+                    },
+                    legend: {
+                        display: false // legend custom di bawah
+                    }
+                }
+            },
+            plugins: [centerText]
         });
     </script>
 @endpush

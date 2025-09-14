@@ -26,9 +26,7 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::get('/', [HomeController::class, 'index'])->middleware(['auth'])->name('dashboard');
 
 Auth::routes();
 
